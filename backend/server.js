@@ -19,7 +19,6 @@ app.use(
     origin: "https://mern-auth-if8gwmoom-raymartbediaformalejo.vercel.app",
     credentials: true,
     optionsSuccessStatus: 200,
-    methods: "GET, HEAD, PUT, POST, DELETE, PATCH",
   })
 );
 
