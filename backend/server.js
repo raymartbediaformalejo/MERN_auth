@@ -14,6 +14,14 @@ connectDB();
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "dito po https://mern-auth-ashy.vercel.app",
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
