@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:2000/",
+    origin: "https://mern-auth-1tkjthpi1-raymartbediaformalejo.vercel.app/",
     credentials: true,
     optionsSuccessStatus: 200,
   })
