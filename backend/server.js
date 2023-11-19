@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://mern-auth-ashy.vercel.app/",
+    origin: "http://localhost:2000",
     credentials: true,
     optionsSuccessStatus: 200,
   })
