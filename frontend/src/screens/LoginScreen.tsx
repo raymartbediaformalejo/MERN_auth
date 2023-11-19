@@ -2,22 +2,23 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
-import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 import Loader from "../components/Loader";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (userInfo) {
@@ -32,7 +33,9 @@ const LoginScreen = () => {
       dispatch(setCredentials({ ...res }));
       navigate("/");
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      console.error(err);
+
+      // if (err) toast.error(err?.data?.message || err.error);
     }
   };
 

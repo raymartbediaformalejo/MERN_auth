@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
 const ProfileScreen = () => {
   const [email, setEmail] = useState("");
@@ -14,25 +15,27 @@ const ProfileScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state) => state.auth);
 
   const [updateProfile, { isLoading }] = useUpdateUserMutation();
 
   useEffect(() => {
-    setName(userInfo.name);
-    setEmail(userInfo.email);
-  }, [userInfo.email, userInfo.name]);
+    if (userInfo) {
+      setName(userInfo.name);
+      setEmail(userInfo.email);
+    }
+  }, [userInfo, userInfo?.email, userInfo?.name]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
     } else {
       try {
         const res = await updateProfile({
-          _id: userInfo._id,
+          _id: userInfo?._id,
           name,
           email,
           password,
@@ -41,7 +44,9 @@ const ProfileScreen = () => {
         dispatch(setCredentials(res));
         toast.success("Profile updated successfully");
       } catch (err) {
-        toast.error(err?.data?.message || err.error);
+        console.error(err);
+
+        // toast.error(err?.data?.message || err.error);
       }
     }
   };

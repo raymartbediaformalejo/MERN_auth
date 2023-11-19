@@ -4,10 +4,11 @@ import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
 // import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
 const RegisterScreen = () => {
   const [name, setName] = useState("");
@@ -15,12 +16,12 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [register, { isLoading }] = useRegisterMutation();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (userInfo) {
@@ -39,7 +40,9 @@ const RegisterScreen = () => {
         dispatch(setCredentials({ ...res }));
         navigate("/");
       } catch (err) {
-        toast.error(err?.data?.message || err.error);
+        console.error(err);
+
+        // toast.error(err?.data?.message || err.error);
       }
     }
   };

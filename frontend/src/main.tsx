@@ -30,7 +30,7 @@ const router = createBrowserRouter(
   )
 );
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <React.StrictMode>
       <RouterProvider router={router} />

@@ -8,8 +8,14 @@ const store = configureStore({
     auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(apiSlice.middleware),
   devTools: true,
 });
 
 export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
