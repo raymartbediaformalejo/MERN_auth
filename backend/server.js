@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://mern-auth-1tkjthpi1-raymartbediaformalejo.vercel.app",
+    origin: "https://mern-auth-if8gwmoom-raymartbediaformalejo.vercel.app",
     credentials: true,
     optionsSuccessStatus: 200,
     methods: "GET, HEAD, PUT, POST, DELETE, PATCH",
