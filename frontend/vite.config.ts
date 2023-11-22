@@ -8,7 +8,7 @@ export default defineConfig({
     port: 2000,
     proxy: {
       "/api": {
-        target: "https://mern-auth-api-bkrg.onrender.com",
+        target: "https://mern-auth-backend-f3yp.onrender.com",
         changeOrigin: true,
       },
     },
