@@ -26,11 +26,15 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     updateUser: builder.mutation<TUserInfo, TUpdate>({
-      query: (data) => ({
-        url: `${USERS_URL}/profile`,
-        method: "PUT",
-        body: data,
-      }),
+      query: (data) => {
+        console.log(data);
+
+        return {
+          url: `${USERS_URL}/profile`,
+          method: "PUT",
+          body: data,
+        };
+      },
     }),
   }),
 });
