@@ -1,7 +1,7 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "",
+  baseUrl: "https://mern-auth-backend-f3yp.onrender.com",
 });
 
 export const apiSlice = createApi({
